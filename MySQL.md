@@ -1,8 +1,8 @@
 # GUIA MYSQL - ORACLE
 
-# 🔨 | DDL 🡪 Lenguaje de definición de datos
+## 🔨 | DDL 🡪 Lenguaje de definición de datos
 
-## Estructura
+### Estructura
 
 ```mysql
 Create database (nombreBaseDatos); 🡪 Crear base de datos
@@ -14,7 +14,7 @@ Create table (nombreTabla); 🡪 Crear la tabla
 Drop database(nombreBaseDatos); 🡪 Borrar base de datos
 ```
 
-### Dentro de tabla
+#### Dentro de tabla
 
 ```mysql
 (nombreColumna)(tipoColumna)(cantidadDeCaracteres) PRIMARY KEY;
@@ -22,27 +22,27 @@ Drop database(nombreBaseDatos); 🡪 Borrar base de datos
 (nombreColumna)(tipoColumna)(cantidadDeCaracteres)(restricción);
 ```
 
-### Tablas con foreign key
+#### Tablas con foreign key
 
-1.  Se declara las PK:
+1. Se declara las PK:
 
     ```mysql
     PRIMARY KEY (nombres de columnas que sean FK y PK)
     ```
 
-2.  Columnas que vayan a ser FK (deben tener el mismo nombre o nombre similar pero con las mismas caracteristicas de la columna):
+2. Columnas que vayan a ser FK (deben tener el mismo nombre o nombre similar pero con las mismas caracteristicas de la columna):
 
     ```mysql
     (nombreColumna)(tipoColumna)(cantidadDeCaracteres)(restricción);
     ```
 
-3.  Atributos que vayan a ser FK (deben tener el mismo nombre o nombre similar pero con las mismas caracteristicas del atributo):
+3. Atributos que vayan a ser FK (deben tener el mismo nombre o nombre similar pero con las mismas caracteristicas del atributo):
 
     ```mysql
     (nombreColumnaPK)(tipoColumnaPK)( cantidadDeCaracteresPK)
     ```
 
-4.  Se crea la FK con la columna anteriormente declarada, se pone una referencia a la columna donde está situada la PK, poner la columna de la PK y por ultimo "on delete cascade on update cascade":
+4. Se crea la FK con la columna anteriormente declarada, se pone una referencia a la columna donde está situada la PK, poner la columna de la PK y por ultimo "on delete cascade on update cascade":
     `mysql
     FOREIGN KEY (nombre columna declarada en esta tabla) REFERENCES (nombreTablaReferenciada)(nombreColumnaDeTablaReferenciada) on delete cascade on update cascade.
     `
@@ -52,7 +52,7 @@ Drop database(nombreBaseDatos); 🡪 Borrar base de datos
 PRIMARY KEY (nombrePKyFK1, nombrePKyFK2, nombrePKyFK3)
 ```
 
-## Edición de las tablas
+### Edición de las tablas
 
 ```mysql
 RENAME TABLE (nombreTabla) TO (nombreNuevoTabla) 🡪 Para cambiar el nombre de una tabla por otro
@@ -73,7 +73,7 @@ Add  (lo que deseemos añadir); 🡪 podemos añadir column, o foreign key o amb
 
 ```
 
-## Tipos de columnas
+### Tipos de columnas
 
 - (nombreColumna) **char** (cantidad de caracteres fija) 🡪 Se utiliza para una cadena de caracteres con valor fijo. Debe contener tantos caracteres como cantidad hayamos puesto. Ejemplo:
 
@@ -101,7 +101,7 @@ apellidos varchar (20) 🡪 pongo “20” para que quepan 20 caracteres o menos
   - Cuando queramos poner el tiempo por defecto del sistema, deberemos poner:
     (nombreColumna) **datetime default now()**; 🡪 se utiliza para la fecha y hora.
 
-### Tipos de restricciones
+#### Tipos de restricciones
 
 **unique** 🡪 no se puede repetir el valor
 
@@ -132,7 +132,7 @@ fecha_Salida **date**, **check** (fecha_Salida > fecha_Entrada)
 CONSTRAINT reserva_PK PRIMARY KEY (refViv, DNI_cliente,f_Ent)
 ```
 
-### Indices
+#### Indices
 
 Es una forma de acceder de forma rápida a los datos de una tabla. Te ayuda a llegar a un dato concreto de tu estructura osea a una columna.
 
@@ -165,9 +165,9 @@ Para mostrar un indice se hace lo siguiente:
 SHOW INDEX FROM (nombreDatabase), (nombreTabla);
 ```
 
-# DCL 🡪 Lenguaje de Control de Datos
+## DCL 🡪 Lenguaje de Control de Datos
 
-## Usuarios
+### Usuarios
 
 _Creación de usuario en general para cualquier pc_
 
@@ -265,15 +265,15 @@ _Para actualizar los privilegios se utiliza:_
 FLUSH privileges;
 ```
 
-## Creación de vista
+### Creación de vista
 
 ```mysql
 CREATE VIEW  viviendas_almeria  AS SELECT refViv FROM vivienda WHERE provincia = 'Almería';
 ```
 
-# ✏️ | DML -> Lenguaje de Manejo de Datos
+## ✏️ | DML -> Lenguaje de Manejo de Datos
 
-## Inserción de datos
+### Inserción de datos
 
 **INSERT INTO** nombreTabla **VALUES** ('Kevin',24518) 🡪 Se introducen los datos de todas las columnas que hay en la tabla. Los datos se deben introducir en orden.
 
@@ -288,7 +288,7 @@ FROM pedido
 WHERE hora_rep IS NOT NULL;
 ```
 
-## Reemplazar filas
+### Reemplazar filas
 
 REPLACE INTO nombreTabla VALUES ('d05','master','islandia'); 🡪 Se hace reemplazo de los datos teniendo en cuenta el ID(PRIMARY KEY)
 
@@ -302,7 +302,7 @@ Ejemplo:
 UPDATE productos SET descripcion = replace (descripcion, ‘ROJO’, ‘VERDE’);
 ```
 
-## Actualizar filas
+### Actualizar filas
 
 **UPDATE** nombreTabla **SET** nombreColumna=nombreColumna\*1.03(ejemplo) **WHERE** nombreColumna = ‘nombreDato’ 🡪 para actualizar los datos (en este caso incrementando un 3%. A partir del WHERE sería para especificar en qué datos pondriamos esa actualización).
 
@@ -324,7 +324,7 @@ _Cuando se quiera actualizar más de un campo, se debe introducir cada dato sepa
 Update pedido set DNI_R = '11245621Q', Hora_rep = '22:20:45' where Numero = '0010';
 ```
 
-## Borrar contenido
+### Borrar contenido
 
 **DELETE FROM** nombreTabla 🡪 borra los datos que hay dentro de las columnas de la tabla pero se queda la estructura
 
@@ -346,7 +346,7 @@ _Si quieres borrar un trozo del contenido de un campo se puede usar el **like**:
 DELETE FROM productos where descripcion like '%ROSCA%';
 ```
 
-## Sumar dias-tiempo
+### Sumar dias-tiempo
 
 Para sumar una fecha se debe utilizar el:
 
@@ -376,7 +376,7 @@ Segundos → **addtime**(hora_servir, '0:0:37') → añadir 37 segundos
 
 Horas, minutos, segundos → **addtime**(hora_servir, ‘1:12:27’) → añadir 1 hora, 12 minutos y 27 segundos
 
-## Borrar contenido con subconsulta
+### Borrar contenido con subconsulta
 
 Se utiliza para borrar datos que dependen de una subconsulta para saber exactamente qué dato queremos borrar ya que en la tabla tal cual no podemos saber cierta información. Un ejemplo sería:
 
@@ -398,9 +398,9 @@ and DNI_R =
 
 Es recomendable realizar primero la subconsulta aparte para saber si el dato está correcto y posteriormente realizar la eliminación del campo con las condiciones que nos han pedido.
 
-# 🔎| CONSULTAS
+## 🔎| CONSULTAS
 
-## Estructura de las consultas
+### Estructura de las consultas
 
 **SELECT** (campos que quiero ver) **FROM** (Tablas en las que están situados) **WHERE** (condición que quieres que cumpla)
 
@@ -758,7 +758,7 @@ having precioMaximo - precioMinimo > 50;
 
 _Cuando queremos obtener más de un resultado en cualquier cálculo, es recomendable hacer un group by para que salgan los distintos resultados._
 
-## Subconsultas
+### Subconsultas
 
 > ¿Qué proveedores tienen media de cantidades por encima de la media?
 
@@ -857,7 +857,7 @@ order by cantidad_incidencias desc;
 # (hay que tener en cuenta todos los detalles ya que en este caso el usuario  no se trata como cliente (FK) sino de reparacion (FK))
 ```
 
-### INNER JOIN
+#### INNER JOIN
 
 Lo que hace es unir tablas. Hace la misma función que el WHERE por lo que cuando se usa INNER JOIN se sustituye por el WHERE. Sólo se usa where cuando haya una condición, y se puede poner CUALQUIER condición.
 
@@ -1054,13 +1054,13 @@ order by tiempoMedio asc;
 
 _PÁGINA DE INTERES PARA EL DATE_FORMAT Y TIME_FORMAT:_
 
-https://conclase.net/mysql/curso/sqlfun/DATE_FORMAT#gsc.tab=0
+<https://conclase.net/mysql/curso/sqlfun/DATE_FORMAT#gsc.tab=0>
 
 _PÁGINA DE INTERES:_
 
-https://www.w3schools.com/sql/sql_create_db.asp
+<https://www.w3schools.com/sql/sql_create_db.asp>
 
-# CONFIGURACIÓN ORACLE
+## CONFIGURACIÓN ORACLE
 
 Dentro de cada usuario podemos tener todos los espacios de trabajo que necesitemos (Workspaces). Siempre crearemos un workspace distinto para cada base de datos.
 
@@ -1078,336 +1078,3 @@ En **Application Builder** podemos importar los scripts.
 En **SQL Workshop** es donde vamos a trabajar. También nos saldrán ahí todos los scripts que importemos, y podremos ver todos sus elementos (tablas, datos, índices…)
 
 Cuando cargas un script, el propio Oracle “traduce” la información que hay dentro. No hay que asustarse al ver las tablas creadas, ya que, aunque se pueda ver distinto a cómo lo has hecho tú, la información es la misma.
-
-# PL/SQL
-
-### Tipos de variables:
-
-CHARACTER 🡪 Caracter.
-
-VARCHAR 🡪 Cadena de caracteres.
-
-DATE 🡪 fechas y horas.
-
-NUMBER 🡪 numeros enteros y decimales positivos y negativos.
-
-NATURAL 🡪 numeros enteros y no negativos.
-
-_No existe TIME. En su lugar, se usa DATE, que es una concatenación de la fecha + la hora, a la que posteriormente tendremos que “recortar” la fecha para poder dejar la hora._
-
-_Para agregar comentarios en nuestro código de PL se utiliza doble guión:_
-
-```pl
--- Comentario de mi código
-```
-
-**ESTRUCTURA GENERAL:**
-
-```pl
-[DECLARE
-	[Declaración de variables, constantes, cursores y excepciones]]
-BEGIN
-[Sentencias ejecutables]
-[EXCEPTION
-	Manejadores de excepciones]
-END;
-```
-
-_Para imprimir la impresión por pantalla se utiliza:_
-
-**DBMS_OUTPUT.PUT_LINE** (‘HOLA’); → Es el PRINTF de PL
-
-## Procedimientos
-
-**CREAR UN PROCEDIMIENTO**:
-
-En un procedimiento se realiza una salida por pantalla.
-
-```pl
-CREATE OR REPLACE PROCEDURE sumar_numeros (
-num1 NUMBER,
-num2 NUMBER)
-IS
-suma NUMBER(6);
-BEGIN
-suma := num1 + num2;
-DBMS_OUTPUT.PUT_LINE('Suma: '|| suma);
-END sumar_numeros;
-
-# En los parámetros que tiene "sumar_numeros" se hace la declaración de cada variable y actúan como parámetros de entrada.
-# Después del IS se declara la variable suma con (6) para indicar la longitud
-# Después del BEGIN se aplica el cálculo que se va a realizar. Es importante poner ":=" para guardar los valores en la variable.
-# La tubería que se pone es para concatenar en la salida
-# Finalmente se pone END con el nombre del procedimiento.
-
-```
-
-Dentro de Object Browser podemos elegir, en el desplegable, el apartado “Procedures” donde podemos ver todos los procedimientos que hemos creado. En este caso, “sumar_numeros”. Así se ve:
-
-![pl](./img/pl01.png)
-
-**EJECUTAR PROCEDIMIENTO:**
-
-```pl
--- Ejecución del procedimiento
-BEGIN
- SUMAR_NUMEROS(4, 3); → No hay distinción de mayúsculas y minúsculas.
-END;
-```
-
-## Funciones
-
-**CREAR UNA FUNCIÓN:**
-
-Las funciones llevan **RETURN** para que te devuelva un valor pero no lo muestra por pantalla. Cada vez que se ejecute la función, hará los cambios repentinos en la base de datos.
-
-```pl
-CREATE OR REPLACE FUNCTION anio(
-fecha DATE)
-RETURN NUMBER
-AS
-v_anio NUMBER(4);
-BEGIN
-v_anio := TO_NUMBER(TO_CHAR(fecha, 'YYYY'));
-RETURN v_anio;
-END anio;
-
-# En el parámetro de anio se declara la variable
-# A continuación en el RETURN se indica lo que va a devolver, en este caso un NUMBER
-# AS → Aunque AS e IS hacen lo mismo, suele usarse IS para números y AS para fechas
-# TO_NUMBER para formato número y TO_CHAR para formato fecha y lo que hay en el paréntesis se pone ‘YYYY’ para que coja el número, por lo que finalmente será un número, ya que siempre se ejecuta de “dentro a fuera”
-```
-
-Dentro de Object Browser podemos elegir, en el desplegable, el apartado “Functions” donde podemos ver todos las funciones que hemos creado. En este caso, “anio”. Así se ve:
-
-![pl](./img/pl02.png)
-
-Para una "impresión por pantalla" debemos realizar lo siguiente:
-
-```pl
-BEGIN
-DBMS_OUTPUT.PUT_LINE('Año: '|| anio('2023-03-13'));
-```
-
-***ABS** → devuelve el valor absoluto (quita el signo) de un número.*
-
-***ABS(TRUNC(MONTHS_BETWEEN(fecha2, fecha1) / 12))** → sirve para restar fechas y sacar la cantidad de meses que hay entre fecha2 y fecha1. Al dividir entre 12 sacamos los años exactos que hay entre fecha 2 y fecha 1, ya que estamos haciendo un TRUNC.\*
-
-_¡¡Si no hay carga de SQL, la fecha por DEFECTO es MM/DD/YYYY!!_
-
-_Ejemplos:_
-
-> Escribir una función que devuelva solamente caracteres alfabéticos sustituyendo cualquier otro carácter por blancos a partir de una cadena que se pasará en la llamada. (Es decir, todo lo que sea número, me lo cambia por espacio en blanco).
-
-*Hay que usar, por ejemplo, un bucle **FOR***:
-
-```pl
-CREATE OR REPLACE FUNCTION sustitucion(
-cadena VARCHAR2)
-RETURN VARCHAR2
-AS
-nuevaCadena VARCHAR2;
-caracter CHARACTER;
-BEGIN
-FOR i IN 1.. LENGTH(cadena) LOOP
-caracter := SUBSTR(cadena, i, 1);
-IF (ascii(caracter) NOT BETWEEN 65 and 90)
-AND (ascii(caracter) NOT BETWEEN 97 and 122) THEN
-caracter := ‘ ‘;
-END IF;
-nuevaCadena := nuevaCadena || caracter;
-END LOOP;
-RETURN nuevaCadena;
-END;
-
-# La "i" es para la primera posición que encuentre hasta el final
-```
-
-> Codificar un procedimiento que reciba una cadena y la visualice al revés.
-
-```pl
-CREATE OR REPLACE PROCEDURE cadenaInversa (
-cadena VARCHAR2)
-AS
-cadenaInvertida VARCHAR2(30);
-BEGIN
-FOR i IN REVERSE 1.. LENGTH(cadena) LOOP
-cadenaInvertida:= cadenaInvertida || SUBSTR (cadena, i, 1);
-END LOOP;
-DBMS_OUTPUT.PUT_LINE (cadenaInvertida);
-END;
-
-# En este FOR hay que usar un REVERSE para empezar el bucle desde el final
-```
-
-_Cuando creamos una función, ésta se puede meter dentro de un procedimiento, con el objetivo de amenizar código y ahorrarnos líneas de código._
-
-Si creo una función como la siguiente:
-
-```pl
-CREATE OR REPLACE FUNCTION sustitucion (
-cad VARCHAR2)
-RETURN VARCHAR2
-AS
-nueva_cad VARCHAR2(30);
-car CHARACTER;
-BEGIN
-FOR i IN 1..LENGTH(cad) LOOP
-car := SUBSTR(cad, i, 1);
-IF (ASCII(car) NOT BETWEEN 65 AND 90)
-AND (ASCII (car) NOT BETWEEN 97 AND 122) THEN
-car :=' ';
-END IF;
-nueva_cad := nueva_cad || car;
-END LOOP;
-RETURN nueva_cad;
-END sustitucion;
-```
-
-Esta función consiste en ‘Limpiar’ una cadena dejándola sólo con letras tanto minúsculas como mayúsculas. Limpia de números, y otros caracteres.
-
-Si creo un procedimiento como el siguiente:
-
-```pl
-CREATE OR REPLACE PROCEDURE cadenasEspaciosProcedimiento(
-cadena VARCHAR2 )
-IS
-BEGIN
-DBMS_OUTPUT.PUT_LINE('Cadena original: ' || cadena);
-DBMS_OUTPUT.PUT_LINE('Cadena sin caracteres que no sean letras: ' ||
-sustitucion(cadena));
-END cadenasEspaciosProcedimiento;
-
-# Podemos ver como llamamos a la función que previamente hemos creado (sustitucion)
-```
-
-Este procedimiento lo que hace es aceptar una palabra y lo que hace es aplicar la función de limpiarla para que nos muestre finalmente la cadena original y la cadena sin caracteres que no sean letras.
-
-De tal modo que la ejecución del procedimiento quedaría de la siguiente manera:
-
-```pl
-BEGIN
-cadenasEspaciosProcedimiento('Juan213Antonio321');
-END;
-```
-
-> Crea un procedimiento que reciba como parámetros el nombre y apellidos de un atleta. El procedimiento debe calcular el nivel del atleta que puede ser: Primer nivel, Segundo nivel ó Tercer nivel. Para ello si el atleta ha obtenido 3 o más podio será de Primer nivel, si ha obtenido al menos 1 podio será de segundo nivel y en otro caso será de Tercer Nivel.
->
-> El procedimiento debe actualizar el campo “nivel” de la tabla atleta (siempre y cuando el nivel del atleta sea distinto al anterior nivel que tuviera) y debe mostrar por pantalla el número de podios obtenidos por el atleta y el nivel.
-
-```pl
-CREATE OR REPLACE PROCEDURE calcular_nivel_atleta (nombre_atleta VARCHAR2, apellidos_atleta VARCHAR2)
-AS
-# Declaración de variables
-num_veces NUMBER;
-dorsal_atleta VARCHAR2(6);
-
-BEGIN
-
-# Lo primero que hacemos es calcular el número de veces que el atleta ha hecho podio
-# EL UPPER ES PARA QUE LIMPIE LOS ACENTOS Y LO PASE TODO A MAYUSCULAS PARA QUE COINCIDA
-# Into para introducir el dato de la tabla en la variable de nuestro procedimiento
-# <> significa “lo contrario a”
-
-SELECT dorsal into dorsal_atleta FROM ATLETA WHERE UPPER(nombre) = UPPER(nombre_atleta) AND UPPER(apellidos) = UPPER(apellidos_atleta);
-
-SELECT count(*) into num_veces FROM COMPETIR WHERE dorsal_atl = dorsal_atleta and posicion IN (1,2,3);
-
-#Ahora, en función del número de podio conseguidos calculamos su nivel
-      IF (num_veces >= 3) THEN
-        DBMS_OUTPUT.PUT_LINE (nombre_atleta || ' ' || apellidos_atleta || ' ' || ' Número de PODIO ' || num_veces || ' VECES ' || ' PRIMER NIVEL');
-
-        UPDATE ATLETA SET nivel = 'PRIMER NIVEL' WHERE dorsal_atleta = dorsal AND nivel <> 'PRIMER NIVEL';
-
-      ELSE IF (num_veces >= 2) THEN
-        DBMS_OUTPUT.PUT_LINE (nombre_atleta || ' ' || apellidos_atleta || ' ' || ' Número de PODIO ' || num_veces || ' VECES ' || ' SEGUNDO NIVEL');
-
-        UPDATE ATLETA SET nivel = 'SEGUNDO NIVEL' WHERE dorsal_atleta = dorsal AND nivel <> 'SEGUNDO NIVEL';
-
-      ELSE
-        DBMS_OUTPUT.PUT_LINE (nombre_atleta || ' ' || apellidos_atleta || ' ' || ' Número de PODIO ' || num_veces || ' VECES ' || ' TERCER NIVEL');
-
-        UPDATE ATLETA SET nivel = 'TERCER NIVEL' WHERE dorsal_atleta = dorsal AND nivel <> 'TERCER NIVEL';
-
-      END IF;
-
-END calcular_nivel_atleta ;
-```
-![pl](./img/pl03.png)
-
-## Cursor
-
-Cuando hagamos cursores (que se usan en PROCEDIMIENTOS), se pone antes del BEGIN, y dentro del cursor va la consulta.
-
-*Ejemplo:* 
-> Crear un procedimiento que reciba como parámetro el código de la excursión y muestre por pantalla un listado con todos los usuarios que han reservado esa excursión. Debe mostrar el nombre y apellido de los distintos usuarios así como el DNI y teléfono. 
-
-```pl
-CREATE OR REPLACE PROCEDURE LISTADO_USUARIOS_RESERVA (codigoExcursion VARCHAR2)
-AS 
-CURSOR Cusuarios is
-Select usuario.nombre, usuario.apellidos, usuario.DNI, usuario.telefono
-from usuario, excursion, reserva
-where usuario.CODIGO_U = reserva.usuario and excursion.CODIGO_E = reserva.EXCURSION
-and UPPER(excursion.CODIGO_E) = UPPER(codigoExcursion);
-
-datos_usuarios Cusuarios%rowtype;
-BEGIN
-DBMS_OUTPUT.PUT_LINE('La excursión con código: '||codigoExcursion|| ' ha sido reservada por los siguientes usuarios:');
-DBMS_OUTPUT.PUT_LINE('Usuarios                          U.dni           U.telefono');
-DBMS_OUTPUT.PUT_LINE('---------------------------------------------------------------------------');
-OPEN Cusuarios;
-FETCH Cusuarios into datos_usuarios;
-WHILE Cusuarios%FOUND LOOP
-DBMS_OUTPUT.PUT_LINE(RPAD(datos_usuarios.nombre,10)||' '|| RPAD(datos_usuarios.apellidos,20)||LPAD(datos_usuarios.DNI,10)||'         ' ||datos_usuarios.telefono);
-FETCH Cusuarios into datos_usuarios;
-  END LOOP;
-CLOSE Cusuarios;
-END LISTADO_USUARIOS_RESERVA;
-
-# RPAD y LPAD se utilizan como función en el cual tiene como parámetro lo que queremos introducir y luego un número que serán los espacios que queremos poner. Si es a la izquierda se utiliza LPAD y si es a la derecha RPAD
-```
-![pl](./img/pl04.png)
-![pl](./img/pl05.png)
-![pl](./img/pl06.png)
-
-# Triggers
-Se usa como disparador, es decir, cuando se ejecute una sentencia, “se dispara” una acción.
-
-Los disparadores son BEFORE o AFTER, ya que puede ser lanzado antes de la sentencia o después.
-
-Cuando insertemos datos nuevos, vamos a trabajar ahora con dos formas nuevas de sentencia, que son → :old y :new
-
-*Ej:* 
-
-:old.nivel, que nos sirve para coger los valores de nivel que había antes.
-
-:new.nivel, que nos sirve para coger los valores del nivel una vez actualizado.
-
-*Ejemplo:*
-
-> Crear un disparador(trigger) que almacene en una tabla, llamada AUDITORIA_NIVEL_ATLETAS, los calores: usuario (con el que estamos autitenticados en Oracle), dorsal, nombre, apellidos, fecha en la que se produce la actualización del nivel de atleta, nivel anterior, nivel posterior. Ese disparador se disparará cuando se detecte una modificación en el campo "nivel" de la tabla ATLETA.
-
-
-![pl](./img/pl07.png)
-
-> Crear un disparador (trigger) que cada vez que se inserte o actualice un registro en la tabla INCIDENCIA con el valor del campo "estado"='Finalizado' se actualice el campo "puntos acumulados" de la tabla USUARIO sumando a este campo el valor del campo "puntos_coste".
-
-```pl
-CREATE OR REPLACE TRIGGER actualiza_estado
-
-AFTER INSERT OR UPDATE ON INCIDENCIA
-
-FOR EACH ROW
-DECLARE
-BEGIN
-
-IF:new.estado='Finalizado'THEN
-  UPDATE USUARIO SET puntos_acumulados=puntos_acumulados + :new.puntos_coste WHERE (:new.num_repara=numero);
-END IF;
-
-EXCEPTION
-  WHEN OTHERS THEN
-  RAISE_APPLICATION_ERROR(-10001,'Error en la auditoria');
-END;
-```
